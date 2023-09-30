@@ -7,13 +7,13 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 
-public class mainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form mainFrame
      */
     int mouseX, mouseY;
-    public mainFrame() {
+    public MainFrame() {
         initComponents();
     }
 
@@ -27,69 +27,23 @@ public class mainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        drag_bg = new javax.swing.JPanel();
-        close_btn = new javax.swing.JLabel();
         menu_bg = new javax.swing.JPanel();
         btn_start = new javax.swing.JButton();
         brand_name = new javax.swing.JLabel();
         tag = new javax.swing.JLabel();
+        btn_exit = new javax.swing.JButton();
         main_bg = new javax.swing.JPanel();
         main_image = new javax.swing.JLabel();
+        menu_principal = new javax.swing.JMenuBar();
+        option1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
-        setUndecorated(true);
         setResizable(false);
 
         bg.setBackground(new java.awt.Color(204, 255, 204));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        drag_bg.setBackground(new java.awt.Color(255, 255, 255));
-        drag_bg.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                drag_bgMouseDragged(evt);
-            }
-        });
-        drag_bg.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                drag_bgMousePressed(evt);
-            }
-        });
-
-        close_btn.setOpaque(true);
-        close_btn.setBackground(new java.awt.Color(255, 255, 255));
-        close_btn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        close_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        close_btn.setText("X");
-        close_btn.setToolTipText("Cerrar pestaña");
-        close_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        close_btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                close_btnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                close_btnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                close_btnMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout drag_bgLayout = new javax.swing.GroupLayout(drag_bg);
-        drag_bg.setLayout(drag_bgLayout);
-        drag_bgLayout.setHorizontalGroup(
-            drag_bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, drag_bgLayout.createSequentialGroup()
-                .addGap(0, 753, Short.MAX_VALUE)
-                .addComponent(close_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        drag_bgLayout.setVerticalGroup(
-            drag_bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(close_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        bg.add(drag_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 30));
 
         menu_bg.setBackground(new java.awt.Color(204, 204, 204));
         menu_bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,22 +52,35 @@ public class mainFrame extends javax.swing.JFrame {
         btn_start.setText("Realizar reserva");
         btn_start.setToolTipText("Realiza una reserva");
         btn_start.setBorder(null);
+        btn_start.setBorderPainted(false);
         btn_start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_startActionPerformed(evt);
             }
         });
-        menu_bg.add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 406, 160, 40));
+        menu_bg.add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 160, 40));
 
         brand_name.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         brand_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         brand_name.setText("Salón principal");
-        menu_bg.add(brand_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 280, 80));
+        menu_bg.add(brand_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 280, 80));
 
         tag.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
         tag.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tag.setText("Restaurante");
-        menu_bg.add(tag, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 280, -1));
+        menu_bg.add(tag, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 280, -1));
+
+        btn_exit.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        btn_exit.setText("Salir");
+        btn_exit.setToolTipText("Realiza una reserva");
+        btn_exit.setBorder(null);
+        btn_exit.setBorderPainted(false);
+        btn_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exitActionPerformed(evt);
+            }
+        });
+        menu_bg.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 160, 40));
 
         bg.add(menu_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 500));
 
@@ -129,6 +96,33 @@ public class mainFrame extends javax.swing.JFrame {
         main_image.setIcon(iconoReescalado);
 
         bg.add(main_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 500, 500));
+
+        menu_principal.setBorder(null);
+        menu_principal.setBorderPainted(false);
+        menu_principal.setOpaque(true);
+
+        option1.setText("Iniciar reserva");
+        option1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        option1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        option1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                option1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                option1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                option1MouseExited(evt);
+            }
+        });
+        option1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                option1ActionPerformed(evt);
+            }
+        });
+        menu_principal.add(option1);
+
+        setJMenuBar(menu_principal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,35 +146,29 @@ public class mainFrame extends javax.swing.JFrame {
         Utilidades.openModal(modal);
     }//GEN-LAST:event_btn_startActionPerformed
 
-    private void drag_bgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drag_bgMousePressed
-        // TODO add your handling code here:
-        mouseX = evt.getX();
-        mouseY = evt.getY();
-    }//GEN-LAST:event_drag_bgMousePressed
-
-    private void drag_bgMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drag_bgMouseDragged
-        // TODO add your handling code here:
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - mouseX, y - mouseY);
-    }//GEN-LAST:event_drag_bgMouseDragged
-
-    private void close_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseExited
-        // TODO add your handling code here:
-        close_btn.setBackground(Color.WHITE);
-        close_btn.setForeground(Color.BLACK);
-    }//GEN-LAST:event_close_btnMouseExited
-
-    private void close_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseEntered
-        // TODO add your handling code here:
-        close_btn.setBackground(Color.red);
-        close_btn.setForeground(Color.white);
-    }//GEN-LAST:event_close_btnMouseEntered
-
-    private void close_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseClicked
+    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_close_btnMouseClicked
+    }//GEN-LAST:event_btn_exitActionPerformed
+
+    private void option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_option1ActionPerformed
+
+    private void option1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_option1MouseClicked
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        FormModal modal = new FormModal(null, true);
+        Utilidades.openModal(modal);
+    }//GEN-LAST:event_option1MouseClicked
+
+    private void option1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_option1MouseEntered
+     
+    }//GEN-LAST:event_option1MouseEntered
+
+    private void option1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_option1MouseExited
+     
+    }//GEN-LAST:event_option1MouseExited
 
     /**
      * @param args the command line arguments
@@ -199,20 +187,21 @@ public class mainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(mainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(mainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(mainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(mainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mainFrame().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }
@@ -220,12 +209,13 @@ public class mainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JLabel brand_name;
+    private javax.swing.JButton btn_exit;
     private javax.swing.JButton btn_start;
-    private javax.swing.JLabel close_btn;
-    private javax.swing.JPanel drag_bg;
     private javax.swing.JPanel main_bg;
     private javax.swing.JLabel main_image;
     private javax.swing.JPanel menu_bg;
+    private javax.swing.JMenuBar menu_principal;
+    private javax.swing.JMenu option1;
     private javax.swing.JLabel tag;
     // End of variables declaration//GEN-END:variables
 }

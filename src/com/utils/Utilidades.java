@@ -2,6 +2,7 @@
 package com.utils;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JComboBox;
@@ -20,8 +21,22 @@ public class Utilidades {
         modal.pack();
         modal.setVisible(true);
     }
+    /**
+     * Formatea una fecha
+     * @param fecha
+     * @return 
+     */
+    public static String formatearFecha(Date fecha){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaComoCadena = formatoFecha.format(fecha);
+        return fechaComoCadena;
+    }
     
-    
+    public static String formatearHora(Date hora){
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        String horaComoCadena = formatoHora.format(hora);
+        return horaComoCadena;
+    }
     
     /**
      * Crea un formato de salida para un spinner

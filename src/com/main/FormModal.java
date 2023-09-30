@@ -4,15 +4,21 @@
  */
 package com.main;
 
-/**
- *
- * @author Angeles
- */
+import com.utils.FormData;
+import com.utils.Utilidades;
+import java.awt.Color;
+import java.util.Date;
+import javax.swing.JComboBox;
+
 public class FormModal extends javax.swing.JDialog {
 
     /**
      * Creates new form FormModal
+     *
+     * @param parent
      */
+    int mouseX, mouseY;
+
     public FormModal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,6 +34,8 @@ public class FormModal extends javax.swing.JDialog {
     private void initComponents() {
 
         main_bg = new javax.swing.JPanel();
+        drag_bg = new javax.swing.JPanel();
+        close_btn = new javax.swing.JLabel();
         form_data = new javax.swing.JPanel();
         form_title = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -39,80 +47,305 @@ public class FormModal extends javax.swing.JDialog {
         input_name = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         input_email = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
+        form_reserva = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        panel_timestamp = new javax.swing.JPanel();
+        label_date = new javax.swing.JLabel();
+        label_hour = new javax.swing.JLabel();
+        input_hour = new javax.swing.JSpinner();
+        input_date = new javax.swing.JSpinner();
+        input_typeEvent = new javax.swing.JComboBox<>();
+        label_typeEvent = new javax.swing.JLabel();
+        panel_timestamp1 = new javax.swing.JPanel();
+        label_asistentes = new javax.swing.JLabel();
+        label_jornadas = new javax.swing.JLabel();
+        input_jornadas = new javax.swing.JSpinner();
+        input_asistentes = new javax.swing.JSpinner();
+        panel_timestamp2 = new javax.swing.JPanel();
+        label_typeCocina = new javax.swing.JLabel();
+        label_jornadas1 = new javax.swing.JLabel();
+        input_typeCocina = new javax.swing.JComboBox<>();
+        input_habitacion = new javax.swing.JComboBox<>();
+        btn_cancel = new javax.swing.JButton();
+        btn_confirm = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(600, 600));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(600, 800));
+        setResizable(false);
         setSize(new java.awt.Dimension(600, 600));
 
         main_bg.setBackground(new java.awt.Color(255, 255, 255));
         main_bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        drag_bg.setBackground(new java.awt.Color(255, 255, 255));
+        drag_bg.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                drag_bgMouseDragged(evt);
+            }
+        });
+        drag_bg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                drag_bgMousePressed(evt);
+            }
+        });
+        drag_bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        close_btn.setOpaque(true);
+        close_btn.setBackground(new java.awt.Color(255, 255, 255));
+        close_btn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        close_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        close_btn.setText("X");
+        close_btn.setToolTipText("Cerrar ventana");
+        close_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        close_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                close_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                close_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                close_btnMouseExited(evt);
+            }
+        });
+        drag_bg.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 50, 30));
+
+        main_bg.add(drag_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 30));
+
+        form_data.setBackground(new Color(235, 235, 235, 200));
         form_data.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        form_title.setFont(new java.awt.Font("Noto Serif", 1, 18)); // NOI18N
+        form_title.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         form_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        form_title.setText("Datos del contacto");
-        form_data.add(form_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, -1));
+        form_title.setText("Datos de contacto");
+        form_data.add(form_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 400, -1));
 
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 12)); // NOI18N
         jLabel1.setLabelFor(input_name);
         jLabel1.setText("NOMBRE");
         jLabel1.setToolTipText("Introduce nombre y apellidos");
-        form_data.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 280, 20));
+        form_data.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 400, 20));
 
-        jLabel4.setFont(new java.awt.Font("Noto Sans", 0, 12)); // NOI18N
         jLabel4.setLabelFor(input_email);
         jLabel4.setText("EMAIL");
         jLabel4.setToolTipText("Introduce email");
-        form_data.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 280, 20));
+        form_data.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 400, 20));
 
-        jLabel5.setFont(new java.awt.Font("Noto Sans", 0, 12)); // NOI18N
         jLabel5.setLabelFor(input_number);
         jLabel5.setText("TELEFONO");
         jLabel5.setToolTipText("Introduce telefono");
-        form_data.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 280, 20));
+        form_data.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 400, 20));
 
+        input_number.setToolTipText("Número de telefono");
         jScrollPane1.setViewportView(input_number);
 
-        form_data.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 280, 30));
+        form_data.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 400, 30));
 
+        input_name.setToolTipText("Nombre de la persona");
         jScrollPane2.setViewportView(input_name);
 
-        form_data.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 280, 30));
+        form_data.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 400, 30));
 
+        input_email.setToolTipText("Dirección de Email");
         jScrollPane3.setViewportView(input_email);
 
-        form_data.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 280, 30));
+        form_data.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 400, 30));
 
-        main_bg.add(form_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 320, 300));
+        main_bg.add(form_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 460, 280));
 
-        jButton1.setText("Cerrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        form_reserva.setBackground(new Color(235, 235, 235, 200));
+        form_reserva.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Datos de la Reserva");
+        form_reserva.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 400, -1));
+
+        panel_timestamp.setBackground(new Color(255, 255, 255, 0));
+        panel_timestamp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_date.setLabelFor(form_data);
+        label_date.setText("FECHA DEL EVENTO");
+        panel_timestamp.add(label_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 20));
+
+        label_hour.setLabelFor(input_hour);
+        label_hour.setText("HORA DEL EVENTO");
+        panel_timestamp.add(label_hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 190, 20));
+
+        input_hour.setToolTipText("Hora del evento");
+        panel_timestamp.add(input_hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 190, 30));
+        Utilidades.crearSpinnerFormat(input_hour, "HH:mm");
+
+        input_date.setToolTipText("Fecha del evento");
+        panel_timestamp.add(input_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        Utilidades.crearSpinnerFormat(input_date, "dd/MM/yyyy");
+
+        form_reserva.add(panel_timestamp, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 400, 70));
+
+        input_typeEvent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        input_typeEvent.setToolTipText("Tipo de evento");
+        input_typeEvent.removeAllItems();
+        input_typeEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                input_typeEventActionPerformed(evt);
             }
         });
-        main_bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 540, 140, -1));
+        form_reserva.add(input_typeEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 400, 30));
+        String[] tipoEvento = {"Boda/Bautizo/Comunión", "Cumpleaños", "Reunión Empresa"};
+        Utilidades.addDropDownItems(input_typeEvent, tipoEvento);
+
+        label_typeEvent.setLabelFor(input_typeEvent);
+        label_typeEvent.setText("TIPO DE EVENTO");
+        form_reserva.add(label_typeEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 400, -1));
+
+        panel_timestamp1.setBackground(new Color(255, 255, 255, 0));
+        panel_timestamp1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_asistentes.setLabelFor(input_asistentes);
+        label_asistentes.setText("NUMERO DE ASISTENTES");
+        panel_timestamp1.add(label_asistentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 20));
+
+        label_jornadas.setLabelFor(input_jornadas);
+        label_jornadas.setText("NUMERO DE JORNADAS");
+        panel_timestamp1.add(label_jornadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 190, 20));
+
+        input_jornadas.setToolTipText("Número de jornadas");
+        panel_timestamp1.add(input_jornadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 190, 30));
+        Utilidades.rangeValueInput(input_jornadas, 0, 7);
+
+        input_asistentes.setToolTipText("Número de asistentes");
+        panel_timestamp1.add(input_asistentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        Utilidades.rangeValueInput(input_asistentes, 0, 99);
+
+        form_reserva.add(panel_timestamp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 400, 70));
+
+        panel_timestamp2.setBackground(new Color(255, 255, 255, 0));
+        panel_timestamp2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_typeCocina.setLabelFor(input_typeCocina);
+        label_typeCocina.setText("TIPO DE COCINA");
+        panel_timestamp2.add(label_typeCocina, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 20));
+
+        label_jornadas1.setLabelFor(input_habitacion);
+        label_jornadas1.setText("HABITACIÓN ASISTENTES");
+        panel_timestamp2.add(label_jornadas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 190, 20));
+
+        input_typeCocina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        input_typeCocina.setToolTipText("Tipo de cocina");
+        panel_timestamp2.add(input_typeCocina, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        String[] tipoCocina = {"Menú cerrado", "Menú a la carta", "Selección del cliente", "Sin concretar"};
+        Utilidades.addDropDownItems(input_typeCocina,tipoCocina);
+
+        input_habitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        input_habitacion.setToolTipText("¿Necesita habitación de asistentes?");
+        panel_timestamp2.add(input_habitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 190, 30));
+        String[] bool = {"NO", "SI"};
+        Utilidades.addDropDownItems(input_habitacion, bool);
+
+        form_reserva.add(panel_timestamp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 400, 70));
+
+        main_bg.add(form_reserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 460, 390));
+
+        btn_cancel.setText("Cancelar y salir");
+        btn_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelActionPerformed(evt);
+            }
+        });
+        main_bg.add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 750, 150, 30));
+
+        btn_confirm.setText("Confirmar y finalizar");
+        btn_confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmActionPerformed(evt);
+            }
+        });
+        main_bg.add(btn_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 750, 150, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/reserva-background.jpg"))); // NOI18N
+        main_bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 600, 770));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main_bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(main_bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main_bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(main_bg, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_cancelActionPerformed
+
+    private void input_typeEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_typeEventActionPerformed
+        // TODO add your handling code here:
+        JComboBox comboBox = (JComboBox) evt.getSource();
+        String selected = (String) comboBox.getSelectedItem();
+        System.out.println(selected);
+        if (selected.equals("Boda/Bautizo/Comunión")) {
+            input_habitacion.setEnabled(true);
+            input_jornadas.setEnabled(false);
+        } else if (selected.equals("Reunión Empresa")) {
+            input_jornadas.setEnabled(true);
+            input_habitacion.setEnabled(false);
+        } else {
+            input_jornadas.setEnabled(false);
+            input_habitacion.setEnabled(false);
+        }
+    }//GEN-LAST:event_input_typeEventActionPerformed
+
+    private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
+        // TODO add your handling code here:
+        String nombre = input_name.getText();
+        Date fecha = (Date) input_date.getValue();
+        Date hora = (Date) input_hour.getValue();
+        FormData datos = new FormData(nombre, fecha, hora);
+        this.dispose();
+         ConfirmationForm modal = new ConfirmationForm(null, true, datos);
+        Utilidades.openModal(modal);
+        
+        
+    }//GEN-LAST:event_btn_confirmActionPerformed
+
+    private void drag_bgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drag_bgMousePressed
+        // TODO add your handling code here:
+        mouseX = evt.getX();
+        mouseY = evt.getY();
+    }//GEN-LAST:event_drag_bgMousePressed
+
+    private void drag_bgMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drag_bgMouseDragged
+        // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - mouseX, y - mouseY);
+    }//GEN-LAST:event_drag_bgMouseDragged
+
+    private void close_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_close_btnMouseClicked
+
+    private void close_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseEntered
+        // TODO add your handling code here:
+        close_btn.setBackground(Color.red);
+        close_btn.setForeground(Color.white);
+    }//GEN-LAST:event_close_btnMouseEntered
+
+    private void close_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseExited
+        // TODO add your handling code here:
+        close_btn.setBackground(Color.WHITE);
+        close_btn.setForeground(Color.BLACK);
+    }//GEN-LAST:event_close_btnMouseExited
 
     /**
      * @param args the command line arguments
@@ -157,18 +390,41 @@ public class FormModal extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancel;
+    private javax.swing.JButton btn_confirm;
+    private javax.swing.JLabel close_btn;
+    private javax.swing.JPanel drag_bg;
     private javax.swing.JPanel form_data;
+    private javax.swing.JPanel form_reserva;
     private javax.swing.JLabel form_title;
+    private javax.swing.JSpinner input_asistentes;
+    private javax.swing.JSpinner input_date;
     private javax.swing.JTextPane input_email;
+    private javax.swing.JComboBox<String> input_habitacion;
+    private javax.swing.JSpinner input_hour;
+    private javax.swing.JSpinner input_jornadas;
     private javax.swing.JTextPane input_name;
     private javax.swing.JTextPane input_number;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> input_typeCocina;
+    private javax.swing.JComboBox<String> input_typeEvent;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel label_asistentes;
+    private javax.swing.JLabel label_date;
+    private javax.swing.JLabel label_hour;
+    private javax.swing.JLabel label_jornadas;
+    private javax.swing.JLabel label_jornadas1;
+    private javax.swing.JLabel label_typeCocina;
+    private javax.swing.JLabel label_typeEvent;
     private javax.swing.JPanel main_bg;
+    private javax.swing.JPanel panel_timestamp;
+    private javax.swing.JPanel panel_timestamp1;
+    private javax.swing.JPanel panel_timestamp2;
     // End of variables declaration//GEN-END:variables
 }
